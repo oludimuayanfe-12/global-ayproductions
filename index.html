@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AY Productions - Learn AI Video Creation</title>
+<link rel="icon" href='../static/images/favicon.png' type="image/png">
+
+<!-- SEO -->
+<meta name="description" content="AY Productions teaches AI video creation, cinematic effects, AI voices, and editing for beginners and creators.">
+<meta name="keywords" content="AI video course, 8K video, AI voice, video editing, cinematic effects">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social -->
+<meta property="og:title" content="AY Productions - Learn AI Video Creation">
+<meta property="og:description" content="Master AI video creation, cinematic effects, AI voices, and editing with AY Productions.">
+<meta property="og:image" content="../static/images/Thumb1.png">
+<meta property="og:url" content="{{ request.url_root }}ayproductions">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Inline critical CSS (moved from static/style.css) -->
+<style>
+:root {
+    --bg: #070b16;
+    --surface: rgba(17, 24, 39, 0.9);
+    --surface-soft: rgba(21, 29, 53, 0.85);
+    --text: #f5f7ff;
+    --muted: #a3b0d0;
+    --accent: #22c7ff;
+    --accent-dark: #0d99c7;
+    --accent-warm: #ffb347;
+    --shadow: 0 24px 60px rgba(3, 12, 32, 0.45);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, rgba(34, 199, 255, 0.12), transparent 28%),
+                            linear-gradient(180deg, #09101d 0%, #060912 100%);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+::selection {
+    background: rgba(34, 199, 255, 0.25);
+    color: var(--text);
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: rgba(8, 12, 24, 0.88);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+section {
+    padding: 80px 10%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.04em;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 10%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(34, 199, 255, 0.22), transparent 24%),
+                            radial-gradient(circle at 80% 30%, rgba(255, 180, 71, 0.18), transparent 18%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    max-width: 900px;
+    padding: 60px;
+    background: rgba(7, 11, 25, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    margin-bottom: 24px;
+    line-height: 1.02;
+}
+
+.hero-content p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.price-box {
+    display: inline-flex;
+    margin: 32px auto 0;
+    padding: 18px 34px;
+    background: linear-gradient(135deg, rgba(255, 179, 71, 0.16), rgba(34, 199, 255, 0.14));
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn,
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 32px;
+    padding: 16px 34px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #060912;
+    box-shadow: 0 22px 50px rgba(34, 199, 255, 0.22);
+}
+
+.btn:hover,
+.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.25);
+}
+
+.whatsapp-btn {
+    background: #25d366;
+    color: #fff;
+}
+
+.cards,
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.card,
+.price-card,
+.info-box {
+    background: var(--surface-soft);
+    padding: 30px;
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+}
+
+.card {
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 14px;
+    font-size: 1.35rem;
+}
+
+.card p {
+    color: var(--muted);
+}
+
+.price-card {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.price-card h3 {
+    font-size: 1.9rem;
+    margin-bottom: 18px;
+}
+
+.big-price {
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--accent);
+    font-weight: 800;
+    margin: 22px 0;
+}
+
+.price-card p {
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.contact-text {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.info-box h3 {
+    margin-bottom: 12px;
+}
+
+.info-box p {
+    color: var(--text);
+}
+
+form {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+input,
+textarea,
+button {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(11, 16, 31, 0.92);
+    color: var(--text);
+}
+
+input {
+    margin-bottom: 18px;
+}
+
+textarea {
+    min-height: 170px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    border-color: rgba(34, 199, 255, 0.55);
+    box-shadow: 0 0 0 4px rgba(34, 199, 255, 0.12);
+}
+
+button {
+    margin-top: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    border: none;
+    color: #060912;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+footer {
+    text-align: center;
+    padding: 40px 10%;
+    background: rgba(8, 12, 24, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer h3 {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+footer p {
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.03);
+}
+
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.video-gallery video {
+    width: 100%;
+    border-radius: 15px;
+}
+
+@media (max-width: 860px) {
+    header {
+        padding: 18px 6%;
+    }
+
+    section {
+        padding: 60px 6%;
+    }
+
+    nav ul {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 680px) {
+    .hero-content {
+        padding: 40px 24px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .price-box,
+    .btn,
+    .whatsapp-btn {
+        width: 100%;
+    }
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero-content h1{
+font-size:36px;
+}
+
+.big-price{
+font-size:50px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img class="logo-icon" src="../static/images/favicon.png" alt="AY_Productions Logo">
+        AY Productions
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#course">Course</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#price">Price</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Learn How To Create Amazing 8K AI Videos</h1>
+
+        <p>
+            Master AI video creation, Cinematic effects,
+            AI Voices, Editing.
+        </p>
+
+        <div class="price-box">
+            ONLY ₦5,000
+        </div>
+
+        <br>
+
+        <a href="#contact" class="btn">
+            Enroll Now
+        </a>
+    </div>
+</section>
+
+<section id="about">
+    <h2>Why Choose AY Productions?</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>8K Video Quality</h3>
+            <p>Create stunning ultra-HD AI videos.</p>
+        </div>
+
+        <div class="card">
+            <h3>AI Prompt Mastery</h3>
+            <p>Learn prompts that generate amazing results.</p>
+        </div>
+
+        <div class="card">
+            <h3>Beginner Friendly</h3>
+            <p>Easy step-by-step lessons.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="course">
+    <h2>What You Will Learn</h2>
+
+    <div class="course-list">
+
+        <div class="card">AI Video Creation</div>
+        <div class="card">AI Voice Generation</div>
+        <div class="card">TikTok & Reels Videos</div>
+        <div class="card">Minecraft AI Videos</div>
+        <div class="card">Video Editing</div>
+        <div class="card">Cinematic Effects</div>
+
+    </div>
+</section>
+
+<section id="gallery">
+    <h2>Portfolio Gallery</h2>
+
+    <div class="gallery">
+        <img src="../static/images/Thumb1.png" alt="AI Image project preview">
+        <img src="../static/images/Thumb2.png" alt="Cinematic scene sample">
+        <img src="../static/images/Thumb3.png" alt="High-quality motion design">
+        <img src="../static/images/Thumb4.png" alt="AI Image Creation example">
+        <img src="../static/images/Thumb5.png" alt="AI Image Creation sample">
+    </div>
+</section>
+
+<section id="price">
+    <h2>Course Price</h2>
+
+    <div class="price-card">
+        <h3>Complete AI Video Course</h3>
+
+        <div class="big-price">
+            ₦5,000
+        </div>
+
+        <p>One-Time Payment • Lifetime Access</p>
+
+        <a href="#contact" class="btn">
+            Register Now
+        </a>
+    </div>
+</section>
+
+<section id="contact">
+
+    <h2>Enroll Today</h2>
+
+    <p class="contact-text">
+        Register now and begin creating professional AI videos.
+    </p>
+
+    <div class="contact-info">
+
+        <div class="info-box">
+            <h3>Email</h3>
+            <p>oludimuayanfe@gmail.com</p>
+        </div>
+
+        <div class="info-box">
+            <h3>WhatsApp</h3>
+            <p>08037243942</p>
+        </div>
+
+    </div>
+
+    <div class="button-group">
+
+        <a
+        href="https://wa.me/2348037243942"
+        target="_blank"
+        class="whatsapp-btn">
+        Chat On WhatsApp
+        </a>
+
+    </div>
+
+    <form
+    action="https://formsubmit.co/oludimuayanfe@gmail.com"
+    method="POST">
+
+        <input type="hidden" name="_captcha" value="false">
+
+        <input type="hidden"
+        name="_subject"
+        value="AY Productions Registration">
+
+        <input
+        type="text"
+        name="name"
+        placeholder="Full Name"
+        required>
+
+        <input
+        type="email"
+        name="email"
+        placeholder="Email Address"
+        required>
+
+        <input
+        type="tel"
+        name="phone"
+        placeholder="Phone Number"
+        required>
+
+        <textarea
+        name="message"
+        placeholder="Tell us why you want to join"
+        required></textarea>
+
+        <button type="submit">
+            Send Registration
+        </button>
+
+    </form>
+
+</section>
+
+<footer>
+    <h3>AY Productions</h3>
+
+    <p>
+        Learn How To Create Amazing 8K High Quality AI Videos
+    </p>
+
+    <p>
+        © 2026 AY Productions. All Rights Reserved.
+    </p>
+</footer>
+
+</body>
+</html>
